@@ -45,6 +45,25 @@
   <script src="js/ie/respond.min.js"></script>
 <![endif]-->
 
+
+<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-firestore.js"></script>
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD3NLILE07LhtwV1G8Gg-gtkSM0aPpzFV8",
+    authDomain: "ux-bootcamp.firebaseapp.com",
+    databaseURL: "https://ux-bootcamp.firebaseio.com",
+    projectId: "ux-bootcamp",
+    storageBucket: "ux-bootcamp.appspot.com",
+    messagingSenderId: "461680580158"
+  };
+  firebase.initializeApp(config);
+
+
+</script>
+
 <script src="js/modernizr.min.js"></script>
 
 <script src="js/pace.js"></script>
@@ -480,36 +499,21 @@
 					<div class="registration-form">
 
 						<form id="paypal-regn">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>First Name</label>
-										<input type="text" class="form-control" name="first_name" placeholder="First Name" required>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>Last Name</label>
-										<input type="text" class="form-control" name="last_name" placeholder="last name" required>
-									</div>
-								</div>
+							<div class="form-group">
+								<label>Name</label>
+								<input type="text" id="registration-name" class="form-control" name="name" placeholder="Name" required>
 							</div>
 							<div class="form-group">
 								<label>Email ID</label>
-								<input type="email" class="form-control" name="email" placeholder="Email Address" required>
+								<input type="email" id="registration-email" class="form-control" name="email" placeholder="Email Address" required>
 							</div>
 							<div class="form-group">
 								<label>Phone Number</label>
-								<input type="tel" class="form-control" name="phone" placeholder="Phone Number" required>
+								<input type="tel" id="registration-phone" class="form-control" name="phone" placeholder="Phone Number" required>
 							</div>
 							<div class="form-group">
 								<label>No. of Seats</label>
-								<select class="form-control" name="quantity" required>
-									<option value="">Choose...</option>
-									<option value="1">1 seat</option>
-									<option value="2">2 seats</option>
-									<option value="3">3 seats</option>
-								</select>
+								<input type="text" id="registration-seats" class="form-control" name="seats" placeholder="No of Seats" required>
 							</div>
 						<!--<div class="form-group">
 								<div class="checkbox">
@@ -597,6 +601,40 @@
 		</div>
 	</div>
 
+	<script>
+		// Get a reference to the database service
+		var firestore = firebase.firestore();
+		
+		const docRef = firestore.doc("users");
+
+		const regName = document.querySelector("#registration-name");
+		const regEmail = document.querySelector("#registration-email");
+		const regPhone = document.querySelector("#registration-phone");
+		const regSeats = document.querySelector("#registration-seats");
+
+		const saveButton = document.querySelector("#btn-submit-form");
+
+		saveButton.addEventListener("click", function(event){
+			event.preventDefault();
+			console.log("you clicked the butt");
+			const name = regName.value;
+			const email = regEmail.value;
+			const phone = regPhone.value;
+			const seats = regSeats.value;
+
+			firestore.collection("users").add({
+				name: name,
+				email: email,
+				phone: phone,
+				seats : seats
+			}).then(function(){
+				console.log("Added succesfuly");
+			}).catch(function(error){
+				console.log("Got an error",error);
+			});
+		});
+		
+	</script>
 
 	<script style="display: none !important;">
 		! function(e, t, r, n, c, a, l) {
