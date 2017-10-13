@@ -603,9 +603,10 @@
 
 	<script>
 		// Get a reference to the database service
+		var database = firebase.database();
 		var firestore = firebase.firestore();
 		
-		const docRef = firestore.doc("users");
+		const docRef = firestore.doc("users/userdata");
 
 		const regName = document.querySelector("#registration-name");
 		const regEmail = document.querySelector("#registration-email");
@@ -633,7 +634,6 @@
 				console.log("Got an error",error);
 			});
 		});
-		
 	</script>
 
 	<script style="display: none !important;">
