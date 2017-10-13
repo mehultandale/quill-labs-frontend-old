@@ -1103,7 +1103,7 @@ p,
 
 .timeline-content p,
 .timeline-content .date {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .timeline-content .date {
@@ -1113,7 +1113,7 @@ p,
 .timeline-content p {
     margin: 10px 0px 5px 0px;
     line-height: 1.6!important;
-    color: #B3B3B3;
+    color: #686868;
 }
 
 .no-touch .timeline-content .read-more:hover {
