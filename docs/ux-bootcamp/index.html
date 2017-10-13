@@ -495,7 +495,7 @@
 					<h4 class="modal-title text-center" id="register-now-label">Event Registration
 					</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="regModal">
 					<div class="registration-form">
 
 						<form id="paypal-regn">
@@ -615,6 +615,9 @@
 
 		const saveButton = document.querySelector("#btn-submit-form");
 
+		const modalContent = document.querySelector("#regModal");
+		const another = document.querySelector("#fillAnother");
+
 		saveButton.addEventListener("click", function(event){
 			event.preventDefault();
 			console.log("you clicked the butt");
@@ -630,9 +633,15 @@
 				seats : seats
 			}).then(function(){
 				console.log("Added succesfuly");
+				
+				modalContent.innerHTML = "<p>We have succesfuly received your request, our team will get back to you within 24 hours to finalise the registration.<p> <p>However, you can still reach out to us at 7738910315</p>";
 			}).catch(function(error){
 				console.log("Got an error",error);
 			});
+		});
+
+		fillAnother.addEventListener("click",function(){
+			modalContent.innerHTML = ""
 		});
 	</script>
 
